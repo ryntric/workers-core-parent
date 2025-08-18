@@ -1,7 +1,7 @@
 package io.github.ryntric;
 
 /**
- * author: vbondarchuk
+ * author: ryntric
  * date: 8/17/25
  * time: 7:05 PM
  **/
