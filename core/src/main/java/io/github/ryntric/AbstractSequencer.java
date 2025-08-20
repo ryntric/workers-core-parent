@@ -13,10 +13,12 @@ abstract class AbstractSequencer implements Sequencer {
     protected final Sequence cursorSequence;
     protected final Sequence gatingSequence;
     protected final PollerWaitPolicy pollerWaitPolicy;
+    protected final ProducerWaitPolicy producerWaitPolicy;
 
-    public AbstractSequencer(PollerWaitPolicy pollerWaitPolicy, int bufferSize) {
+    public AbstractSequencer(PollerWaitPolicy pollerWaitPolicy, ProducerWaitPolicy producerWaitPolicy, int bufferSize) {
         this.bufferSize = bufferSize;
         this.pollerWaitPolicy = pollerWaitPolicy;
+        this.producerWaitPolicy = producerWaitPolicy;
         this.cursorSequence = new Sequence(INITIAL_CURSOR_VALUE);
         this.gatingSequence = new Sequence(INITIAL_CURSOR_VALUE);
     }

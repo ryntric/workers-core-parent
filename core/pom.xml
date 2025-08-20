@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>core</artifactId>
-    <version>${library.version}</version>
     <packaging>jar</packaging>
+    <version>${library.version}</version>
 
 </project>

@@ -8,19 +8,21 @@ package io.github.ryntric;
 
 public final class PollerWaitPolicyFactory {
 
-    public static PollerWaitPolicy create(WaitingPolicyType type) {
+    public static PollerWaitPolicy create(PollerWaitPolicyType type) {
         PollerWaitPolicy policy = null;
         switch (type) {
             case BLOCKING:
                 policy = new PollerBlockingPolicy();
+                break;
             case PARKING:
                 policy = new PollerParkingPolicy();
+                break;
             case SPINNING:
                 policy = new PollerSpinningPolicy();
+                break;
             case YIELDING:
                 policy = new PollerYieldingPolicy();
-            case LOOPING:
-                policy = new PollerLoopingPolicy();
+                break;
         }
         return policy;
     }

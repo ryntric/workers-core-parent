@@ -53,9 +53,10 @@ public class ManyToOneRingBufferBatchPerfTest {
 
     @State(Scope.Group)
     public static class OneToOneRingBufferState {
-        private final PollerWaitPolicy policy = PollerWaitPolicyFactory.create(WaitingPolicyType.LOOPING);
-        private final RingBuffer<Event> ringBuffer = new RingBuffer<>(Event::new, SequencerType.MULTI_PRODUCER, policy,1 << 12);
-        private final EventPoller<Event> eventPoller = new EventPoller<>("worker-test", new ThreadGroup("test"), ringBuffer, policy, HANDLER, BatchSizeLimit._1_2);
+        private final PollerWaitPolicy pollerPolicy = PollerWaitPolicyFactory.create(PollerWaitPolicyType.PARKING);
+        private final ProducerWaitPolicy producerPolicy = ProducerWaitPolicyFactory.create(ProducerWaitPolicyType.PARKING);
+        private final RingBuffer<Event> ringBuffer = new RingBuffer<>(Event::new, SequencerType.MULTI_PRODUCER, pollerPolicy, producerPolicy, 1 << 12);
+        private final EventPoller<Event> eventPoller = new EventPoller<>("worker-test", new ThreadGroup("test"), ringBuffer, pollerPolicy, HANDLER, BatchSizeLimit._1_2);
 
         @Setup
         public void setup() {

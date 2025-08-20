@@ -22,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.ryntric</groupId>
-            <artifactId>workers-core</artifactId>
+            <artifactId>core</artifactId>
             <version>${library.version}</version>
         </dependency>
         <dependency>
