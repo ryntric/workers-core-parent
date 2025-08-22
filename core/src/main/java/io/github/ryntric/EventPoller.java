@@ -37,9 +37,11 @@ public final class EventPoller<T> extends Thread {
     }
 
     private long await(Sequence cursor, long next) {
-        long available;
-        while ((available = cursor.getAcquire()) < next) {
-            waitPolicy.await();
+        long available = cursor.getPlain();
+        if (available < next) {
+            while ((available = cursor.getAcquire()) < next) {
+                waitPolicy.await();
+            }
         }
         return available;
     }
