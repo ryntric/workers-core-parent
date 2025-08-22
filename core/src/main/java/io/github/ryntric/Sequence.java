@@ -48,10 +48,6 @@ public final class Sequence extends RightPaddings {
         super(value);
     }
 
-    public Sequence() {
-        super(0L);
-    }
-
     public long getPlain() {
         return value;
     }

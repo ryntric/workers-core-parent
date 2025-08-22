@@ -53,9 +53,9 @@ public final class OneToOneSequencer extends OneToOneSequencerRightPaddings impl
 
     @Override
     public long next(int n) {
+        long cached = this.cached;
         long next = sequence + n;
         long wrapPoint = next - bufferSize;
-        long cached = this.cached;
 
         if (wrapPoint > cached) {
             this.cached = await(gatingSequence, wrapPoint);
