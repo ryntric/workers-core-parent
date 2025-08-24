@@ -3,9 +3,10 @@ package io.github.ryntric;
 import org.openjdk.jcstress.annotations.Actor;
 import org.openjdk.jcstress.annotations.Expect;
 import org.openjdk.jcstress.annotations.JCStressTest;
+import org.openjdk.jcstress.annotations.Mode;
 import org.openjdk.jcstress.annotations.Outcome;
+import org.openjdk.jcstress.annotations.Signal;
 import org.openjdk.jcstress.annotations.State;
-import org.openjdk.jcstress.infra.results.L_Result;
 
 /**
  * author: ryntric
@@ -13,34 +14,20 @@ import org.openjdk.jcstress.infra.results.L_Result;
  * time: 9:39 PM
  **/
 
-@JCStressTest
-@Outcome(id = "resolved", expect = Expect.ACCEPTABLE)
-@Outcome(id = "null", expect = Expect.FORBIDDEN)
+@State
+@JCStressTest(Mode.Termination)
+@Outcome(id = "TERMINATED", expect = Expect.ACCEPTABLE)
 public class AwaitableStressTest {
-
-    @State
-    public static class AwaitableState {
-        private final Awaitable<Object> awaitable = new Awaitable<>();
-    }
+    private final Awaitable<Object> awaitable = new Awaitable<>();
 
     @Actor
-    public void provider(AwaitableState state) {
-        state.awaitable.resolve("resolved");
+    public void provider() {
+        awaitable.resolve("resolved");
     }
 
-    @Actor
-    public void reader1(AwaitableState state, L_Result result) {
-        result.r1 = state.awaitable.join();
+    @Signal
+    public void receiver() {
+        awaitable.join();
     }
-
-    @Actor
-    public void reader2(AwaitableState state, L_Result result) {
-        result.r1 = state.awaitable.join();
-    }
-
-    //    @Actor
-    //    public void reader2(AwaitableState state, L_Result result) {
-    //        result.r1 = state.awaitable.join();
-    //    }
 
 }
