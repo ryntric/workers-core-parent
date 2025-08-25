@@ -34,3 +34,14 @@ jobs:
           path: './'
       - name: 'Run JMH tests on linux'
         run: java -jar -Xms2G -Xmx2G -XX:+AlwaysPreTouch jmh-1.0-SNAPSHOT.jar
+  jmh-windows:
+    runs-on: windows-latest
+    needs: maven-build
+    steps:
+      - name: 'Download artifact'
+        uses: actions/download-artifact@v4
+        with:
+          name: 'jmh-1.0-SNAPSHOT.jar'
+          path: './'
+      - name: 'Run JMH tests on windows'
+        run: java -jar -Xms2G -Xmx2G -XX:+AlwaysPreTouch jmh-1.0-SNAPSHOT.jar
