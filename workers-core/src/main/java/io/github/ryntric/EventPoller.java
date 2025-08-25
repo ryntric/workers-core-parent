@@ -3,7 +3,7 @@ package io.github.ryntric;
 import io.github.ryntric.util.Util;
 
 /**
- * author: vbondarchuk
+ * author: ryntric
  * date: 8/25/25
  * time: 12:13 PM
  **/

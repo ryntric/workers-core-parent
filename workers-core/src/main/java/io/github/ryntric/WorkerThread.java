@@ -1,7 +1,5 @@
 package io.github.ryntric;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
  * author: ryntric
  * date: 8/13/25
@@ -9,7 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  **/
 
 public final class WorkerThread<T> extends Thread {
-    private final AtomicBoolean running = new AtomicBoolean();
+    private final PaddedBoolean running = new PaddedBoolean();
 
     private final EventHandler<T> handler;
     private final EventPoller<T> poller;
@@ -25,13 +23,18 @@ public final class WorkerThread<T> extends Thread {
 
     @Override
     public void start() {
-        if (running.compareAndSet(false, true)) {
+        if (running.compareAndSetVolatile(false, true)) {
             super.start();
         }
     }
 
     @Override
     public void run() {
+        PaddedBoolean running = this.running;
+        EventPoller<T> poller = this.poller;
+        EventHandler<T> handler = this.handler;
+        WaitPolicy waitPolicy = this.waitPolicy;
+
         handler.onStart();
         while (running.getAcquire()) {
             if (poller.poll(handler) == PollState.IDLE) {
@@ -42,7 +45,7 @@ public final class WorkerThread<T> extends Thread {
     }
 
     public void shutdown() {
-        running.set(false);
+        running.setRelease(false);
     }
 
 
