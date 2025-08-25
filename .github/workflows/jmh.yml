@@ -30,7 +30,7 @@ jobs:
       - name: 'Download artifact'
         uses: actions/download-artifact@v4
         with:
-          name: jmh.jar
-          path: .
+          name: 'jmh.jar'
+          path: ./jmh.jar
       - name: 'Run JMH tests on linux'
         run: java -jar -Xms2G -Xmx2G -XX:+AlwaysPreTouch jmh.jar
