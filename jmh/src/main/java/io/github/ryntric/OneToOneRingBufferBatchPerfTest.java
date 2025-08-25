@@ -15,7 +15,6 @@ import org.openjdk.jmh.annotations.Warmup;
 
 import java.util.concurrent.TimeUnit;
 
-import static io.github.ryntric.WaitPolicy.PARKING;
 import static io.github.ryntric.WaitPolicy.SPINNING;
 
 /**
