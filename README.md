@@ -1,3 +1,4 @@
+[![LICENSE](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/ryntric/workers-core-parent/blob/master/LICENSE)
 [![Maven Build](https://github.com/ryntric/workers-core-parent/actions/workflows/build.yml/badge.svg)](https://github.com/ryntric/workers-core-parent/actions/workflows/build.yml)
 [![JMH Benchmark](https://github.com/ryntric/workers-core-parent/actions/workflows/jmh.yml/badge.svg)](https://github.com/ryntric/workers-core-parent/actions/workflows/jmh.yml)
 [![JCStress Tests](https://github.com/ryntric/workers-core-parent/actions/workflows/jcstress.yml/badge.svg)](https://github.com/ryntric/workers-core-parent/actions/workflows/jcstress.yml)
