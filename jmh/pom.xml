@@ -11,7 +11,7 @@
 
     <artifactId>jmh</artifactId>
     <packaging>jar</packaging>
-    <version>${library.version}</version>
+    <version>${revision}</version>
 
     <properties>
         <jmh-core.version>1.37</jmh-core.version>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>io.github.ryntric</groupId>
             <artifactId>workers-core</artifactId>
-            <version>${library.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.openjdk.jmh</groupId>

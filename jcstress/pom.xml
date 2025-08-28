@@ -14,13 +14,13 @@
     <properties>
         <jcstress-core.version>0.16</jcstress-core.version>
     </properties>
-    <version>${library.version}</version>
+    <version>${revision}</version>
 
     <dependencies>
         <dependency>
             <groupId>io.github.ryntric</groupId>
             <artifactId>workers-core</artifactId>
-            <version>${library.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.openjdk.jcstress</groupId>
