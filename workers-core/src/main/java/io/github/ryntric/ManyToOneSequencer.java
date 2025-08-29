@@ -73,7 +73,7 @@ public final class ManyToOneSequencer extends ManyToOneSequencerRightPaddings {
 
     private void initAvailableSlotBuffer() {
         for (int i = 0; i < bufferSize; i++) {
-            availableSlotBuffer.putInt(Util.wrappedBufferIndex(i, bufferSize), -1);
+            availableSlotBuffer.putInt(i, -1);
         }
     }
 

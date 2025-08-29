@@ -9,13 +9,13 @@ import io.github.ryntric.util.Util;
  **/
 
 public final class EventPoller<T> {
-    private final RingBuffer<T> buffer;
+    private final AbstractRingBuffer<T> buffer;
     private final Sequencer sequencer;
     private final Sequence sequence;
     private final Sequence gatingSequence;
     private final int batchSize;
 
-    public EventPoller(RingBuffer<T> buffer, BatchSizeLimit batchSizeLimit) {
+    public EventPoller(AbstractRingBuffer<T> buffer, BatchSizeLimit batchSizeLimit) {
         this.buffer = buffer;
         this.sequencer = buffer.getSequencer();
         this.sequence = sequencer.getGatingSequence();

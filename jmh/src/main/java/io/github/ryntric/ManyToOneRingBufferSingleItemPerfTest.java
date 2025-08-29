@@ -51,7 +51,7 @@ public class ManyToOneRingBufferSingleItemPerfTest {
 
     @State(Scope.Group)
     public static class RingBufferState {
-        private final RingBuffer<Event> ringBuffer = new RingBuffer<>(Event::new, SequencerType.MULTI_PRODUCER, SPINNING,1 << 12);
+        private final AbstractRingBuffer<Event> ringBuffer = new OnHeapRingBuffer<>(Event::new, SequencerType.MULTI_PRODUCER, SPINNING,1 << 12);
         private final WorkerThread<Event> workerThread = new WorkerThread<>("worker-test", new ThreadGroup("test"), ringBuffer, SPINNING, HANDLER, BatchSizeLimit._1_2);
 
         @Setup

@@ -1,12 +1,10 @@
 package io.github.ryntric;
 
 import org.openjdk.jcstress.annotations.Actor;
-import org.openjdk.jcstress.annotations.Arbiter;
 import org.openjdk.jcstress.annotations.Expect;
 import org.openjdk.jcstress.annotations.JCStressTest;
 import org.openjdk.jcstress.annotations.Outcome;
 import org.openjdk.jcstress.annotations.State;
-import org.openjdk.jcstress.infra.results.L_Result;
 import org.openjdk.jcstress.infra.results.Z_Result;
 
 import java.util.concurrent.atomic.LongAdder;
@@ -47,7 +45,7 @@ public class OneToOneSequencerStressTest {
         }
     };
 
-    private final RingBuffer<Object> ringBuffer = new RingBuffer<>(Object::new, SequencerType.SINGLE_PRODUCER, WaitPolicy.SPINNING, 8192);
+    private final OnHeapRingBuffer<Object> ringBuffer = new OnHeapRingBuffer<>(Object::new, SequencerType.SINGLE_PRODUCER, WaitPolicy.SPINNING, 8192);
     private final EventPoller<Object> eventPoller = new EventPoller<>(ringBuffer, BatchSizeLimit._1_1);
 
     @Actor

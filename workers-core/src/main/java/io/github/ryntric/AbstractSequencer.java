@@ -30,22 +30,22 @@ abstract class AbstractSequencer implements Sequencer {
     }
 
     @Override
-    public Sequence getCursorSequence() {
+    public final Sequence getCursorSequence() {
         return cursorSequence;
     }
 
     @Override
-    public Sequence getGatingSequence() {
+    public final Sequence getGatingSequence() {
         return gatingSequence;
     }
 
     @Override
-    public int size() {
+    public final int size() {
         return bufferSize;
     }
 
     @Override
-    public int distance() {
+    public final int distance() {
         return (int) (cursorSequence.getAcquire() - gatingSequence.getAcquire());
     }
 }

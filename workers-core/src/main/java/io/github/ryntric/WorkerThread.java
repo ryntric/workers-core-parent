@@ -13,7 +13,7 @@ public final class WorkerThread<T> extends Thread {
     private final EventPoller<T> poller;
     private final WaitPolicy waitPolicy;
 
-    public WorkerThread(String name, ThreadGroup group, RingBuffer<T> buffer, WaitPolicy waitPolicy, EventHandler<T> handler, BatchSizeLimit limit) {
+    public WorkerThread(String name, ThreadGroup group, AbstractRingBuffer<T> buffer, WaitPolicy waitPolicy, EventHandler<T> handler, BatchSizeLimit limit) {
         super(group, name);
         this.handler = handler;
         this.poller = new EventPoller<>(buffer, limit);
