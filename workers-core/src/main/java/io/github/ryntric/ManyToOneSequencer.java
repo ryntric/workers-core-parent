@@ -81,14 +81,14 @@ public final class ManyToOneSequencer extends ManyToOneSequencerRightPaddings {
         return (int) (value >>> indexShift);
     }
 
-    private boolean isAvailable(long value) {
-        int index = Util.wrappedBufferIndex(value, mask);
-        int flag = calculateAvailabilityFlag(value);
+    private boolean isAvailable(long sequence) {
+        int index = Util.wrappedBufferIndex(sequence, mask);
+        int flag = calculateAvailabilityFlag(sequence);
         return (int) AVAILABLE_SLOT_BUFFER_VH.get(availableSlotBuffer, index) == flag || (int) AVAILABLE_SLOT_BUFFER_VH.getAcquire(availableSlotBuffer, index) == flag;
     }
 
-    private void setAvailable(long value) {
-        setAvailableBufferValue(Util.wrappedBufferIndex(value, mask), calculateAvailabilityFlag(value));
+    private void setAvailable(long sequence) {
+        setAvailableBufferValue(Util.wrappedBufferIndex(sequence, mask), calculateAvailabilityFlag(sequence));
     }
 
     private void setAvailableBufferValue(int index, int flag) {

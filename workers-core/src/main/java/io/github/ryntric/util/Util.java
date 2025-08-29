@@ -49,12 +49,16 @@ public final class Util {
         return buffer;
     }
 
-    public static int wrapPaddedIndex(long value, long mask) {
-        return Constants.ARRAY_PADDING + (int) (value & mask);
+    public static int wrappedIndex(long sequence, long mask) {
+        return (int) (sequence & mask);
     }
 
-    public static int wrappedBufferIndex(long value, long mask) {
-        return ((int) (value & mask)) << 2;
+    public static int wrapPaddedIndex(long sequence, long mask) {
+        return Constants.ARRAY_PADDING + wrappedIndex(sequence, mask);
+    }
+
+    public static int wrappedBufferIndex(long sequence, long mask) {
+        return wrappedIndex(sequence, mask) << 2;
     }
 
     public static int getByteBufferCapacity(int bufferSize) {
