@@ -3,9 +3,7 @@ package io.github.ryntric.util;
 import io.github.ryntric.Constants;
 import io.github.ryntric.EventFactory;
 
-import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
 import java.lang.invoke.VarHandle;
 
 /**
@@ -53,6 +51,18 @@ public final class Util {
 
     public static int wrapPaddedIndex(long value, long mask) {
         return Constants.ARRAY_PADDING + (int) (value & mask);
+    }
+
+    public static int wrappedPaddedByteBufferIndex(long value, long mask) {
+        return wrapPaddedIndex(value, mask) << 2;
+    }
+
+    public static int getByteBufferCapacity(int bufferSize) {
+        long capacity = (long) bufferSize << 2;
+        if (capacity > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("Request capacity too large" + capacity);
+        }
+        return (int) capacity;
     }
 
 
