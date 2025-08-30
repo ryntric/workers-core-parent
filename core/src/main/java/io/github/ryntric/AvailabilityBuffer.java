@@ -21,21 +21,24 @@ public final class AvailabilityBuffer {
     private final long mask;
 
     public AvailabilityBuffer(int size) {
-        this.buffer = ByteBuffer.allocateDirect(getCapacity(size))
+        this.buffer = ByteBuffer.allocateDirect(checkCapacity(getCapacity(size)))
                 .order(ByteOrder.nativeOrder());
         this.mask = size - 1;
         this.shift = Util.log2(size);
-        init(size);
+        this.init(size);
     }
 
     private void init(int size) {
         for (int i = 0; i < size; i++) {
-            buffer.putInt(i, (int) Sequence.INITIAL_VALUE);
+            buffer.put(calculateIndex(i), (byte) Sequence.INITIAL_VALUE);
         }
     }
 
-    private int getCapacity(int size) {
-        long capacity = (long) size << 2;
+    private long getCapacity(long size) {
+        return (size << 2) + (Constants.ARRAY_PADDING << 2);
+    }
+
+    private int checkCapacity(long capacity) {
         if (capacity > Integer.MAX_VALUE) {
             throw new IllegalArgumentException("Requested capacity is too large" + capacity);
         }
@@ -47,7 +50,7 @@ public final class AvailabilityBuffer {
     }
 
     private int calculateIndex(long sequence) {
-        return Util.wrappedIndex(sequence, mask) << 2;
+        return Util.wrapPaddedIndex(sequence, mask) << 2;
     }
 
     public boolean isAvailable(long sequence) {

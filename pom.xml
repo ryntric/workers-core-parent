@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.ryntric</groupId>
-    <artifactId>workers-core-parent</artifactId>
+    <artifactId>workers-core</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>workers-core</module>
+        <module>core</module>
         <module>jmh</module>
         <module>jcstress</module>
     </modules>
