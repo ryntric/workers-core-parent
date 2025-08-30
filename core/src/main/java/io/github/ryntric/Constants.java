@@ -1,5 +1,7 @@
 package io.github.ryntric;
 
+import sun.misc.Unsafe;
+
 /**
  * author: ryntric
  * date: 8/14/25
@@ -7,5 +9,7 @@ package io.github.ryntric;
  **/
 
 public interface Constants {
-    int ARRAY_PADDING = 32;
+    int CACHE_LINE_SIZE = 64;
+    int OBJECT_ARRAY_PADDING = CACHE_LINE_SIZE / Unsafe.ARRAY_OBJECT_INDEX_SCALE;
+    int BYTE_BUFFER_PADDING =  64;
 }

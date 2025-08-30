@@ -1,6 +1,5 @@
 package io.github.ryntric.util;
 
-import io.github.ryntric.Constants;
 import io.github.ryntric.EventFactory;
 
 import java.lang.invoke.MethodHandles;
@@ -49,12 +48,8 @@ public final class Util {
         return buffer;
     }
 
-    public static int wrappedIndex(long sequence, long mask) {
+    public static int wrapIndex(long sequence, long mask) {
         return (int) (sequence & mask);
-    }
-
-    public static int wrapPaddedIndex(long sequence, long mask) {
-        return Constants.ARRAY_PADDING + wrappedIndex(sequence, mask);
     }
 
 

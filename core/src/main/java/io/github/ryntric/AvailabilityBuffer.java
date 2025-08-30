@@ -35,7 +35,7 @@ public final class AvailabilityBuffer {
     }
 
     private long getCapacity(long size) {
-        return (size << 2) + (Constants.ARRAY_PADDING << 2);
+        return (size << 2) + (Constants.BYTE_BUFFER_PADDING << 1);
     }
 
     private int checkCapacity(long capacity) {
@@ -50,7 +50,7 @@ public final class AvailabilityBuffer {
     }
 
     private int calculateIndex(long sequence) {
-        return Util.wrapPaddedIndex(sequence, mask) << 2;
+        return (Util.wrapIndex(sequence, mask) << 2) + Constants.BYTE_BUFFER_PADDING;
     }
 
     public boolean isAvailable(long sequence) {

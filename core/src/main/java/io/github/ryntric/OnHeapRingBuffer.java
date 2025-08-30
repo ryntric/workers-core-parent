@@ -14,12 +14,16 @@ public final class OnHeapRingBuffer<E> extends AbstractRingBuffer<E> {
 
     public OnHeapRingBuffer(EventFactory<E> factory, SequencerType sequencerType, WaitPolicy waitPolicy, int size) {
         super(size, sequencerType, waitPolicy);
-        this.buffer = Util.fillEventBuffer(factory, (E[]) new Object[Constants.ARRAY_PADDING * 2 + size]);
+        this.buffer = Util.fillEventBuffer(factory, (E[]) new Object[(Constants.OBJECT_ARRAY_PADDING << 1) + size]);
+    }
+
+    private int wrapIndex(long sequence, long mask) {
+        return Util.wrapIndex(sequence, mask) + Constants.OBJECT_ARRAY_PADDING;
     }
 
     @Override
     public E get(long sequence) {
-        return buffer[Util.wrapPaddedIndex(sequence, mask)];
+        return buffer[wrapIndex(sequence, mask)];
     }
 
 }
